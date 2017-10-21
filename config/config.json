@@ -1,0 +1,18 @@
+{
+    "test": {
+      "PORT": 3000,
+      "MONGODB_URI": "mongodb://127.0.0.1:27017/shopping-test",
+      "JWT_SECRET": "secret!",
+      "SESSION_SECRET": "secret"
+    },
+    "development": {
+      "PORT": 3000,
+      "MONGODB_URI": "mongodb://127.0.0.1:27017/shopping-poker",
+      "JWT_SECRET": "secret!",
+      "SESSION_SECRET": "secret"
+    },
+    "production": {
+      "SESSION_SECRET": "secret"
+    }
+  }
+  

@@ -6,6 +6,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
+// settings
+require('./config/config');
 // plugins
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -17,10 +19,8 @@ const exphbs = require('express-handlebars');
 
 // custom helpers
 const helpers = require('./bin/library/helpers');
-// configs
+// security
 require('./config/passport');
-// database setup
-mongoose.connect('localhost:27017/shopping');
 // pages
 const index = require('./routes/index');
 const user = require('./routes/user');
