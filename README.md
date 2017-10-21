@@ -1,9 +1,3 @@
-# node-shopping-cart
-Node JS, jquery, bootstrap@4, express, express-session, express-validator, express-handlebars (helpers), mongoDB (mongoose), connect-mongo, cookie, passport (local), csurf, multer.
-
-# Hakkında
-  Yukarıda belirtilen tüm eklentiler ve daha fazlası bu projede örnekler ile kullanılmıştır. Projenin amacı sizlerle tecrübelerimi paylaşmaktır.
-
 # Neler yaptık?
 * Ürün Ekleme ve Düzeltme işlemleri.
 * Ürüne Fotoğraf Eklemek ve Düzeltme işlemi sırasında eski fotoğrafı silmek yenisini yüklemek.
@@ -21,3 +15,20 @@ Node JS, jquery, bootstrap@4, express, express-session, express-validator, expre
 * Güvenlik işlemleri için "passport" ve "passport-local" yanı sıra csurf ile desteklendi.
 * Fotoğraf yükleme işlemleri için "multer" tercih edildi.
 * Sepet oluşturma işlemleri sırasında "session", "connect-mongo" ve "cookie" kullanıldı.
+
+---
+
+# Technologies
+
+- Back-end
+
+NodeJS, Express, Multer, MongoDB, Mongoose.
+
+- Fron-end
+
+Handlebars and Bootstrap@4.
+
+---
+
+@All
+"Node JS, jquery, express, express-session, express-validator, express-handlebars (helpers), mongoDB (mongoose), connect-mongo, cookie, passport (local), csurf, multer"
