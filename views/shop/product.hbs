@@ -1,16 +1,116 @@
-{{#each products}}
-<div class="row" style="margin-bottom:20px">
-  {{#each this}}
-  <div class="col-sm-6 col-md-4">
-    <div class="card" style="width: 20rem;">
-      <img class="card-img-top" src="{{this.imagePath}}" alt="Card image cap">
-      <div class="card-body">
-        <h4 class="card-title">{{this.title}}</h4>
-        <p class="card-text">{{this.description}}</p>
-        <p class="price">${{this.price}}</p>
-      </div>
+<div class="row">
+    <div class="col-md-4">
+        <form id="frmData" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="imagePath" class="control-label">Picture</label>
+                <input type="file" name="imagePath" id="imagePath" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="title" class="control-label">Title</label>
+                <input type="text" name="title" id="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="description" class="control-label">Description</label>
+                <input type="text" name="description" id="description" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="price" class="control-label">Price</label>
+                <input type="number" name="price" id="price" class="form-control">
+            </div>
+            <a id="reset" href="#" class="btn btn-primary">Reset</a>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+        <div class="clearfix">&nbsp;</div>
+        <p>
+            <span id="status"></span>
+            <input type="hidden" name="id" id="id" value="">
+        </p>
     </div>
-  </div>
-  {{/each}}
+    <div class="col-md-8">
+        <div id="tblData" class="row">
+            {{#each products}}
+            <div id="div_{{_id}}" class="list col-md-4 col-sm-6 col-sx-6">
+                <div class="card" style="width: 15rem;">
+                    <img class="card-img-top" src="/images/shop/{{imagePath}}" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">{{title}}</h4>
+                        <p class="card-text">{{description}}</p>
+                        <p class="price">${{price}}</p>
+                        <a href="/product/{{_id}}" class="btn btn-success">Edit</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
 </div>
-{{/each}}
+<script>
+    $(document).ready(function () {
+        const form = document.getElementById('frmData');
+        form.addEventListener('submit', function (e) {
+            $('#status').empty().text('İşleminiz gerçekleştiriliyor...');
+
+            const imagePath = document.getElementById('imagePath').files[0];
+
+            const oData = new FormData(form);
+            const oReq = new XMLHttpRequest();
+
+            const id = $('#id').val();
+            if (id === '') {
+                oReq.open('post', '/product/add', true);
+            } else {
+                oReq.open('post', '/product/update/' + id, true);
+            }
+            oReq.onload = function (oEvent) {
+                if (oReq.status == 201) {
+                    // GELEN DATAYI JSON OBJESİNE ÇEVİRMEK
+                    var m = JSON.parse(oReq.response);
+                    var item = `
+                        <div class="card" style="width: 15rem;">
+                            <img class="card-img-top" src="/images/shop/${m.imagePath}" alt="${m.title}">
+                            <div class="card-body">
+                                <h4 class="card-title">${m.title}</h4>
+                                <p class="card-text">${m.description}</p>
+                                <p class="price">${m.price}</p>
+                                <a href="/product/${m._id}" class="btn btn-success">Edit</a>
+                            </div>
+                        </div>`;
+                    if (m.isUpdate) {
+                        $('#div_' + m._id).html(item);
+                    } else {
+                        var list = $('#tblData');
+                        var div = `
+                            <div id='div_${m._id}' class="list col-md-4 col-sm-6 col-sx-6">
+                                ${item}
+                            </div>`;
+                        list.append(item);
+                    }
+                    $('#status').empty();
+                } else {
+                    $('#status').empty().text('Bu işlem gerçekleştirilirken hata oluştu..');
+                }
+            };
+
+            oReq.send(oData);
+            e.preventDefault();
+        });
+
+        $(document).on('click', '#frmData #reset', function () {
+            $('#id').val('');
+            $('#frmData input').val('');
+            return false;
+        });
+
+        $(document).on('click', '#tblData a', function () {
+            $.get(
+                $(this).attr('href')
+            ).done((m) => {
+                $('#id').val(m._id);
+                $('#title').val(m.title);
+                $('#description').val(m.description);
+                $('#price').val(m.price);
+            })
+            return false;
+        });
+    });
+</script>

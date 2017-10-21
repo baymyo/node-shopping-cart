@@ -1,0 +1,14 @@
+body .container {
+    margin-top: 40px;
+}
+<<<<<<< HEAD:public/css/style.css
+.list { 
+    margin-bottom: 15px;
+}
+=======
+/* product */
+>>>>>>> c2957144e2607ff189646d36e75e7d842a3017a0:public/stylesheets/style.css
+.price {
+    font-weight: bold;
+    font-size: 16px;
+}
