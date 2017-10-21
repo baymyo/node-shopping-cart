@@ -18,17 +18,42 @@
 
 ---
 
-# Technologies
+### Run Locally on Your Machine
+You need Node, NPM and MongoDB properly installed.
 
-- Back-end
+Clone this repository
+``` shell
+    git clone https://github.com/brenohq/nodejs-shopping-cart.git
+```
+Setup the environment variables replacing <MONGODB-PORT> with your mongodb port, usually is 27017.
+``` shell
+    export MONGO_DB_URI=mongodb://localhost:<MONGODB-PORT>/shopping
+```
+Install dependencies
+``` shell
+    npm install
+```
 
-NodeJS, Express, Multer, MongoDB, Mongoose.
+With your mongod service running, this will populate shopping database
+``` shell
+    node seed/product-seeder.js 
+```
+This will start dev server at http://localhost:3000 with Nodemon.
+``` shell
+    npm run dev
+```
 
-- Fron-end
+### Tests
+``` shell
+    npm test
+```
 
-Handlebars and Bootstrap@4.
-
+### Technologies
+###### Back-end
+NodeJS, Express, MongoDB, Mongoose. 
+###### Fron-end
+Handlebars and Bootstrap.
 ---
 
-@All
+###### All Plugins
 "Node JS, jquery, express, express-session, express-validator, express-handlebars (helpers), mongoDB (mongoose), connect-mongo, cookie, passport (local), csurf, multer"
