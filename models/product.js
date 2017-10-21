@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var { mongoose } = require('../config/database');
+
 var schema = mongoose.Schema;
 
 var productSchema = new schema({
