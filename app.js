@@ -7,15 +7,17 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 // plugins
-const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
 const validator = require('express-validator');
 const MongoStore = require('connect-mongo')(session);
+const exphbs = require('express-handlebars');
 
-// config set
+// custom helpers
+const helpers = require('./bin/library/helpers');
+// configs
 require('./config/passport');
 // database setup
 mongoose.connect('localhost:27017/shopping');
@@ -29,7 +31,7 @@ const app = express();
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
-app.engine('.hbs', exphbs({ defaultLayout: 'layout', extname: '.hbs' }));
+app.engine('.hbs', exphbs({ helpers: helpers, defaultLayout: 'layout', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
 // uncomment after placing your favicon in /public

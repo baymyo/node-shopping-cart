@@ -1,34 +1,37 @@
 {{#if products}}
 <div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offse3">
-        <ul class="list-group">
-            {{#each products}}
-            <li class="list-group-item justify-content-between">
-                <strong>{{this.item.title}}</strong>
-                <span class="badge badge-primary">${{ this.price }}</span>
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Action
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">Reduce by 1</a>
-                        <a class="dropdown-item" href="#">Remove All</a>
-                    </div>
-                </div>
-                <span class="badge badge-success badge-pill pull-right">{{ this.qty }}</span>
-            </li>
-            {{/each}}
+    <div class="col-sm-6 col-md-8 col-md-offset-3 col-sm-offse3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ürün</th>
+                    <th scope="col" class="text-center">Adet</th>
+                    <th scope="col" class="text-right">Tutar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <th scope="row">{{math @index "+" 1}}</th>
+                    <td>{{this.item.title}}</td>
+                    <td class="text-center">{{ this.qty }}</td>
+                    <td class="text-right">${{ this.price }}</td>
+                </tr>
+                {{/each}}
+                <tr style="font-weight:600">
+                    <td colspan="2" class="text-right">Total</td>
+                    <td class="text-center">{{ totalQty }}</td>
+                    <td class="text-right">${{ totalPrice }}</td>
+                </tr>
+            </tbody>
+        </table>
         </ul>
     </div>
 </div>
+<div class="clearfix">&nbsp;</div>
 <div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offse3">
-        <strong>Total: {{ totalPrice }}</strong>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offse3">
+    <div class="col-sm-6 col-md-8 col-md-offset-3 col-sm-offse3 text-right">
         <button type="button" class="btn btn-success">Checkout</button>
     </div>
 </div>
