@@ -1,6 +1,7 @@
 'use strict';
 
-// Handlebars Object
+// handlebars için registerHelper tanımlama işlemleri.
+// express-handlebars içerisinde registerHelpers yoktur bu yüzden bu şekilde bir tanımlama ile ekliyoruz.
 const hbs = require('handlebars');
 
 // {{#ifx value1 value2 operator="=="}} ... {{/ifx}}

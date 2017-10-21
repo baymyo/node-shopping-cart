@@ -1,4 +1,4 @@
-//Ortama göre config ayarları yapılıyor
+// duruma göre değişiklik gösteren ayarlar.
 let env = process.env.NODE_ENV || 'development';
 
 if (env === 'development' || env === 'test') {
