@@ -15,7 +15,7 @@ const flash = require('connect-flash');
 const validator = require('express-validator');
 const MongoStore = require('connect-mongo')(session);
 
-// config
+// config set
 require('./config/passport');
 // database setup
 mongoose.connect('localhost:27017/shopping');
