@@ -1,3 +1,5 @@
+// sepet işlemlerimiz için gerekli olacak sınıfımızı tanımlıyoruz.
+// yaptığımız ayarlar sonucunda veritabanımızda tutulacak olan session tablosu ile ortak çalışacak bir yapı kurduk.
 module.exports = function Cart(oldCard) {
     this.items = oldCard.items || {};
     this.totalQty = oldCard.totalQty || 0;

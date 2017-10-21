@@ -75,6 +75,8 @@ passport.use('local.signin', new LocalStrategy({
     });
 }));
 
+// bu fonksiyonlar passport.js referans verdiğim yerde kullanabilmek için buraya ekledim.
+// aktif user varmı yok mu diye bilgileri kontrol ediyorlar.
 module.exports = {
     isLoggedIn: function (req, res, next) {
         if (req.isAuthenticated()) {

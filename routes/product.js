@@ -7,7 +7,7 @@ const fs = require('fs');
 const middleware = require('../config/passport');
 // product 
 const Product = require('../models/product');
-
+// fotoğraf yüklemeleri için gerekli ayarlar
 const multerConf = {
   storage: multer.diskStorage({
     destination: function (req, file, next) {

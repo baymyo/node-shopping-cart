@@ -1,5 +1,8 @@
 const Product = require('../models/product');
 
+// hiç veriyoksa eklemek için çalıştırın.
+// node seed/product-seeder.js
+
 // database connect
 const mongoose = require('mongoose');
 // connectionString
