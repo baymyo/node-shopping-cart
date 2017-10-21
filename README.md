@@ -1,16 +1,3 @@
-# node-shopping-cart
-
-
-# Technologies
-
-- Back-end
-
-NodeJS, Express, Multer, MongoDB, Mongoose.
-
-- Fron-end
-
-Handlebars and Bootstrap@4.
-
 # Neler yaptık?
 * Ürün Ekleme ve Düzeltme işlemleri.
 * Ürüne Fotoğraf Eklemek ve Düzeltme işlemi sırasında eski fotoğrafı silmek yenisini yüklemek.
@@ -31,4 +18,17 @@ Handlebars and Bootstrap@4.
 
 ---
 
+# Technologies
+
+- Back-end
+
+NodeJS, Express, Multer, MongoDB, Mongoose.
+
+- Fron-end
+
+Handlebars and Bootstrap@4.
+
+---
+
+@All
 "Node JS, jquery, express, express-session, express-validator, express-handlebars (helpers), mongoDB (mongoose), connect-mongo, cookie, passport (local), csurf, multer"
