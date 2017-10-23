@@ -18,7 +18,7 @@ const MongoStore = require('connect-mongo')(session);
 const exphbs = require('express-handlebars');
 
 // custom helpers
-const helpers = require('./bin/library/helpers');
+const helpers = require('./config/helpers');
 // security
 require('./config/passport');
 // pages
