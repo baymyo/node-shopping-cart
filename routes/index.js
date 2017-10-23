@@ -42,10 +42,10 @@ router.get('/shopping-cart', function (req, res, next) {
 
 router.get('/checkout', function (req, res, next) {
   if (!req.session.cart) {
-    return res.render('shop/checkout', { products: null });
+    return res.redirect('/shopping-cart')
   }
   var cart = new Cart(req.session.cart);
-  res.render('shop/checkout', { products: cart.generateArray(), totalQty: cart.totalQty, totalPrice: cart.totalPrice });
+  res.render('shop/checkout', { totalPrice: cart.totalPrice });
 });
 
 module.exports = router;
