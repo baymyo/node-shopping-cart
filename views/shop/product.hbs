@@ -76,7 +76,7 @@
             }
             oReq.onload = function (oEvent) {
                 if (oReq.status == 201) {
-                    // GELEN DATAYI JSON OBJESİNE ÇEVİRMEK
+                    // GELEN DATA JSON OBJESİNE ÇEVİRMEK
                     var m = JSON.parse(oReq.response);
                     var item = `
                         <td><img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/${m.imagePath}" alt=""></td>
