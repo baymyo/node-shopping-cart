@@ -27,21 +27,34 @@
         </p>
     </div>
     <div class="col-md-8">
-        <div id="tblData" class="row">
-            {{#each products}}
-            <div id="div_{{_id}}" class="list col-md-4 col-sm-6 col-sx-6">
-                <div class="card" style="width: 15rem;">
-                    <img class="card-img-top" src="/images/shop/{{imagePath}}" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">{{title}}</h4>
-                        <p class="card-text">{{description}}</p>
-                        <p class="price">${{price}}</p>
+        <table id="tblData" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Resim</th>
+                    <th scope="col">Ürün</th>
+                    <th scope="col" class="text-right">Tutar</th>
+                    <th scope="col" class="text-center">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>
+                        <img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/{{imagePath}}" alt="">
+                    </td>
+                    <td>
+                        <strong>{{title}}</strong>
+                        <div class="clearfix"></div>
+                        <small>{{description}}</small>
+                    </td>
+                    <td class="text-right">${{ price }}</td>
+                    <td class="text-right">
                         <a href="/product/{{_id}}" class="btn btn-success">Edit</a>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
 </div>
 <script>
@@ -66,24 +79,23 @@
                     // GELEN DATAYI JSON OBJESİNE ÇEVİRMEK
                     var m = JSON.parse(oReq.response);
                     var item = `
-                        <div class="card" style="width: 15rem;">
-                            <img class="card-img-top" src="/images/shop/${m.imagePath}" alt="${m.title}">
-                            <div class="card-body">
-                                <h4 class="card-title">${m.title}</h4>
-                                <p class="card-text">${m.description}</p>
-                                <p class="price">${m.price}</p>
-                                <a href="/product/${m._id}" class="btn btn-success">Edit</a>
-                            </div>
-                        </div>`;
+                        <td><img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/${m.imagePath}" alt=""></td>
+                        <td>
+                            <strong>${m.title}</strong>
+                            <div class="clearfix"></div>
+                            <small>${m.description}</small>
+                        </td>
+                        <td class="text-right">${m.price}</td>
+                        <td class="text-right"><a href="/product/${m._id}" class="btn btn-success">Edit</a></td>`;
                     if (m.isUpdate) {
-                        $('#div_' + m._id).html(item);
+                        $('#tr_' + m._id).html(item);
                     } else {
                         var list = $('#tblData');
                         var div = `
-                            <div id='div_${m._id}' class="list col-md-4 col-sm-6 col-sx-6">
+                            <tr id='tr_${m._id}' class="col-sm-6 col-md-4">
                                 ${item}
-                            </div>`;
-                        list.append(item);
+                            </tr>`;
+                        list.prepend(item);
                     }
                     $('#status').empty();
                 } else {
