@@ -89,7 +89,7 @@ router.post('/update/:id', multer(multerConf).single('imagePath'), function (req
     // OLD IMAGE REMOVE
     if (data.imagePath === '') {
       data.imagePath = result.imagePath;
-    } else {
+    } else if (fs.existsSync(result.imagePath)) {
       fs.unlink('./public/images/shop/' + result.imagePath);
     }
     // RETURN

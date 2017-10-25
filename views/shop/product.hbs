@@ -1,5 +1,7 @@
 <div class="row">
     <div class="col-md-4">
+        <h1>Product</h1>
+        <hr>
         <form id="frmData" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="imagePath" class="control-label">Picture</label>
@@ -38,7 +40,7 @@
             </thead>
             <tbody>
                 {{#each products}}
-                <tr>
+                <tr id="{{_id}}">
                     <td>
                         <img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/{{imagePath}}" alt="">
                     </td>
@@ -74,11 +76,12 @@
             } else {
                 oReq.open('post', '/product/update/' + id, true);
             }
+
             oReq.onload = function (oEvent) {
                 if (oReq.status == 201) {
                     // GELEN DATA JSON OBJESİNE ÇEVİRMEK
                     var m = JSON.parse(oReq.response);
-                    var item = `
+                    var td = `
                         <td><img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/${m.imagePath}" alt=""></td>
                         <td>
                             <strong>${m.title}</strong>
@@ -88,16 +91,19 @@
                         <td class="text-right">${m.price}</td>
                         <td class="text-right"><a href="/product/${m._id}" class="btn btn-success">Edit</a></td>`;
                     if (m.isUpdate) {
-                        $('#tr_' + m._id).html(item);
+                        var tr = $('#tblData > tbody #' + m._id);
+                        tr.html(td);
+                        tr.addClass('bg-anim bg-highlight').hide().fadeIn("slow").addClass('bg-normal');
                     } else {
-                        var list = $('#tblData');
-                        var div = `
-                            <tr id='tr_${m._id}' class="col-sm-6 col-md-4">
-                                ${item}
+                        var tr = `
+                            <tr id="${m._id}" class="bg-anim bg-highlight">
+                                ${td}
                             </tr>`;
-                        list.prepend(item);
+                        $(tr).hide().prependTo('#tblData > tbody').fadeIn("slow").addClass('bg-normal');
                     }
                     $('#status').empty();
+                    $('#id').val('');
+                    $('#frmData input').val('');
                 } else {
                     $('#status').empty().text('Bu işlem gerçekleştirilirken hata oluştu..');
                 }
