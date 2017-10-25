@@ -1,8 +1,8 @@
 {{#if products}}
-<h1>Shopping Cart</h1>
-<div class="clearfix">&nbsp;</div>
 <div class="row">
-    <div class="col-sm-8 col-md-10 -col-md-offset-2 col-sm-offset-2">
+    <div class="col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1">
+        <h1>Shopping Cart</h1>
+        <div class="clearfix">&nbsp;</div>
         <table class="table">
             <thead>
                 <tr>
@@ -18,8 +18,7 @@
                 <tr>
                     <th scope="row">{{math @index "+" 1}}</th>
                     <td>
-                        <img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/{{this.item.imagePath}}"
-                            alt="">
+                        <img class="img-thumbnail" style="width: 75px; height: 75px;" src="/images/shop/{{this.item.imagePath}}" alt="">
                     </td>
                     <td>
                         <strong>{{this.item.title}}</strong>
@@ -41,13 +40,13 @@
 </div>
 <div class="clearfix">&nbsp;</div>
 <div class="row">
-    <div class="col-sm-8 col-md-10 -col-md-offset-2 col-sm-offset-2 text-right">
+    <div class="col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1 text-right">
         <a href="/checkout" class="btn btn-success">Checkout</a>
     </div>
 </div>
 {{else}}
 <div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offse3">
+    <div class="col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1">
         <h1>No Items in Cart</h1>
     </div>
 </div>

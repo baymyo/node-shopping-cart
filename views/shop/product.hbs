@@ -88,7 +88,7 @@
                             <div class="clearfix"></div>
                             <small>${m.description}</small>
                         </td>
-                        <td class="text-right">${m.price}</td>
+                        <td class="text-right">${'$' + m.price}</td>
                         <td class="text-right"><a href="/product/${m._id}" class="btn btn-success">Edit</a></td>`;
                     if (m.isUpdate) {
                         var tr = $('#tblData > tbody #' + m._id);
