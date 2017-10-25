@@ -5,16 +5,30 @@ const router = express.Router();
 const csrf = require('csurf');
 const passport = require('passport');
 const middleware = require('../config/middleware');
-// product 
+
+// carts
+const Cart = require('../models/cart');
+// db object 
 const Product = require('../models/product');
+const order = require('../models/order');
+
 // token
 const csrfProtection = csrf();
 router.use(csrfProtection);
 
 /* GET user page. */
 router.get('/profile', middleware.isLoggedIn, function (req, res, next) {
-    console.log("profile in");
-    res.render('user/profile');
+    order.find({ user: req.user }, function (err, orders) {
+        if (err) {
+            return res.write('Error!');
+        }
+        var cart;
+        orders.forEach(function (order) {
+            cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        });
+        res.render('user/profile', { orders: orders });
+    });
 });
 
 router.get('/logout', middleware.isLoggedIn, function (req, res, next) {

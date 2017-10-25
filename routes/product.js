@@ -34,8 +34,8 @@ const multerConf = {
 
 /* GET product page. */
 router.get('/', middleware.isLoggedIn, function (req, res, next) {
-  Product.find(function (err, data) {
-    res.render('shop/product', { title: 'Products', products: data });
+  Product.find(function (err, result) {
+    res.render('shop/product', { title: 'Products', products: result });
   });
 });
 
@@ -46,7 +46,7 @@ router.get('/:id', middleware.isLoggedIn, (req, res) => {
     if (err) throw err;
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(result));
-  })
+  });
 });
 
 /* POST product page. */
@@ -89,7 +89,7 @@ router.post('/update/:id', multer(multerConf).single('imagePath'), function (req
     // OLD IMAGE REMOVE
     if (data.imagePath === '') {
       data.imagePath = result.imagePath;
-    } else {
+    } else if (fs.existsSync(result.imagePath)) {
       fs.unlink('./public/images/shop/' + result.imagePath);
     }
     // RETURN

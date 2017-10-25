@@ -5,19 +5,20 @@
     </div>
   </div>
 </div>
-
-
 {{#each products}}
-<div class="row" style="margin-bottom:20px">
+<div class="row">
   {{#each this}}
-  <div class="col-sx-12 col-sm-6 col-md-4" style="width: 20rem;">
-    <div class="card">
-      <img class="card-img-top" src="images/shop/{{imagePath}}" alt="">
-      <div class="card-body">
-        <h4 class="card-title">{{title}}</h4>
-        <p class="card-text">{{description}}</p>
+  <div id="div_{{_id}}" class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="/images/shop/{{imagePath}}" alt="">
+      <div class="caption">
+        <h3>{{title}}</h3>
+        <p>{{description}}</p>
         <p class="price">${{price}}</p>
-        <a href="/add-to-cart/{{_id}}" class="btn btn-success pull-right">Add To Cart</a>
+        <p>
+          <a href="/add-to-cart/{{_id}}" class="btn btn-success pull-right">Add To Cart</a>
+        </p>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
