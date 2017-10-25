@@ -9,3 +9,7 @@ body .container {
     font-weight: bold;
     font-size: 16px;
 }
+.hidden{
+  display: none;
+  visibility: hidden;
+}
