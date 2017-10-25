@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+// carts
+const Cart = require('../models/cart');
 // product 
 const Product = require('../models/product');
-const Cart = require('../models/cart');
+const Order = require('../models/order');
+// security
+const middleware = require('../config/middleware');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -41,7 +45,7 @@ router.get('/shopping-cart', function (req, res, next) {
   res.render('shop/shopping-cart', { products: cart.generateArray(), totalQty: cart.totalQty, totalPrice: cart.totalPrice });
 });
 
-router.get('/checkout', function (req, res, next) {
+router.get('/checkout', middleware.isLoggedIn, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart')
   }
@@ -50,7 +54,7 @@ router.get('/checkout', function (req, res, next) {
   res.render('shop/checkout', { totalPrice: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
 });
 
-router.post('/checkout', function (req, res, next) {
+router.post('/checkout', middleware.isLoggedIn, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart')
   }
@@ -66,9 +70,18 @@ router.post('/checkout', function (req, res, next) {
       req.flash('error', err.message);
       return res.redirect('/checkout');
     }
-    req.flash('success', 'Successfully bougth product!');
-    req.session.cart = null;
-    res.redirect('/');
+    var order = new Order({
+      user: req.user,
+      cart: cart,
+      address: req.body.address,
+      name: req.body.name,
+      paymentId: charge.id
+    });
+    order.save(function (err, result) {
+      req.flash('success', 'Successfully bougth product!');
+      req.session.cart = null;
+      res.redirect('/');
+    });
   });
 });
 

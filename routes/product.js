@@ -4,7 +4,7 @@ const multer = require('multer');
 const fs = require('fs');
 
 // security
-const middleware = require('../config/passport');
+const middleware = require('../config/middleware');
 // product 
 const Product = require('../models/product');
 // fotoğraf yüklemeleri için gerekli ayarlar
